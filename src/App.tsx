@@ -4,7 +4,7 @@ import WeatherDisplay from "./components/WeatherDisplay";
 import SearchBar from "./components/SearchBar";
 
 export default function App() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
 
   return (
     <div className="App container-xl">
