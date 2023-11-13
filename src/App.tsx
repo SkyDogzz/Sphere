@@ -12,9 +12,15 @@ export default function App() {
     if (search.length >= 3) {
       const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
       const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
-      axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes").then((response) => {
-        setData(response.data);
-      });
+
+      axios
+        .get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes")
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, [search]);
 
