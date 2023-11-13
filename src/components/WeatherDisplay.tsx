@@ -1,11 +1,36 @@
 type WeatherDisplayProps = {
-  search: string;
+  data: {
+    location: {
+      name: string;
+    };
+    current: {
+      condition: {
+        text: string;
+      };
+      temp_c: number;
+      temp_f: number;
+      wind_kph: number;
+      wind_mph: number;
+    };
+  };
 };
 
-export default function WeatherDisplay({ search }: WeatherDisplayProps) {
+export default function WeatherDisplay({ data }: WeatherDisplayProps) {
+  console.log(data);
   return (
     <div className="weather-display">
-      <h2>Weather Display: {search}</h2>
+      {data && (
+        <>
+          <h2>{data.location.name}</h2>
+          <p>{data.current.condition.text}</p>
+          <p>
+            {data.current.temp_c}°C / {data.current.temp_f}°F
+          </p>
+          <p>
+            {data.current.wind_kph} km/h / {data.current.wind_mph} mph
+          </p>
+        </>
+      )}
     </div>
   );
 }

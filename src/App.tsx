@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import WeatherDisplay from "./components/WeatherDisplay";
 import SearchBar from "./components/SearchBar";
 
 export default function App() {
   const [search, setSearch] = useState<string>("");
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    if (search.length >= 3) {
+      const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
+      const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
+      axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes").then((response) => {
+        setData(response.data);
+      });
+    }
+  }, [search]);
 
   return (
     <div className="App container-xl">
       <Header />
-      <WeatherDisplay search={search} />
+      <WeatherDisplay data={data} />
       <SearchBar search={search} setSearch={setSearch} />
     </div>
   );
