@@ -28,7 +28,7 @@ type PrevisionDisplayProps = {
 };
 
 export default function PrevisionDisplay({ data }: PrevisionDisplayProps) {
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [selectedDay, setSelectedDay] = useState<number>(0);
 
   const handleDayClick = (dayIndex: number) => {
     setSelectedDay(dayIndex);
@@ -42,7 +42,7 @@ export default function PrevisionDisplay({ data }: PrevisionDisplayProps) {
           <h2 className="text-center mb-3">{data.location.name}</h2>
           <div className="d-flex justify-content-center flex-wrap mb-3">
             {data.forecast.forecastday.slice(1).map((day, index) => (
-              <button key={day.date} onClick={() => handleDayClick(index)} className="btn btn-primary m-1">
+              <button key={day.date} onClick={() => handleDayClick(index)} className={`btn ${selectedDay === index ? "btn-secondary" : "btn-primary"} m-1`}>
                 {day.date}
               </button>
             ))}
