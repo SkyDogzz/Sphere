@@ -33,8 +33,7 @@ export default function App() {
           const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=7&aqi=yes&alerts=yes");
           setPrevisionData(previsionResponse.data);
           setApiError("");
-        }
-        catch (error: any) {
+        } catch (error: any) {
           setApiError(error.response.data.error.message);
           setPrevisionData(null);
         }
@@ -51,10 +50,10 @@ export default function App() {
   return (
     <div className="App container-xl">
       <Header />
+      <SearchBar search={search} setSearch={setSearch} />
       {apiError && <p className="error-message">{apiError}</p>}
       {isLoading ? <LoadingSpinner /> : <WeatherDisplay data={weatherData} />}
       {isLoading ? <LoadingSpinner /> : <PrevisionDisplay data={previsionData} />}
-      <SearchBar search={search} setSearch={setSearch} />
     </div>
   );
 }
