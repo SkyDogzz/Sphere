@@ -8,6 +8,7 @@ import SearchBar from "./components/SearchBar";
 export default function App() {
   const [search, setSearch] = useState<string>("");
   const [weatherData, setWeatherData] = useState<any>(null);
+  const [hourlyData, setHourlyData] = useState<any>(null);
   const [previsionData, setPrevisionData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string>("");
@@ -29,6 +30,15 @@ export default function App() {
           setWeatherData(null);
         }
 
+        try {
+          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=1&aqi=yes&alerts=yes");
+          setHourlyData(previsionResponse.data);
+          setApiError("");
+        } catch (error: any) {
+          setApiError(error.response.data.error.message);
+          setHourlyData(null);
+        }
+        
         try {
           const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=7&aqi=yes&alerts=yes");
           setPrevisionData(previsionResponse.data);
@@ -52,7 +62,7 @@ export default function App() {
       <Header />
       <SearchBar search={search} setSearch={setSearch} />
       {apiError && <p className="error-message">{apiError}</p>}
-      {isLoading ? <LoadingSpinner /> : <WeatherDisplay data={weatherData} />}
+      {isLoading ? <LoadingSpinner /> : <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />}
       {isLoading ? <LoadingSpinner /> : <PrevisionDisplay data={previsionData} />}
     </div>
   );
