@@ -21,8 +21,8 @@ export default function App() {
           const response = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
           setData(response.data);
         } catch (error: any) {
-          if (error.response) console.error("Error " + error.response.data.error.code + ": " + error.response.data.error.message);
           setApiError(error.response.data.error.message);
+          setData(null);
         }
         setTimeout(() => {
           setIsLoading(false);
