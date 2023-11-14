@@ -9,15 +9,22 @@ export default function App() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    if (search.length >= 3) {
-      const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
-      const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    const fetchData = async () => {
+      if (search.length >= 3) {
+        const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
+        const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
-      axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes").then((response) => {
-        if (response.data.location.name === data.location.name) return;
-        setData(response.data);
-      });
-    }
+        try {
+          const response = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
+          if (response.data.location.name === data.location.name) return;
+          setData(response.data);
+        } catch (error: any) {
+          if (error.response) console.error("Error " + error.response.data.error.code + ": " + error.response.data.error.message);
+        }
+      }
+    };
+
+    fetchData();
   }, [search]);
 
   return (
