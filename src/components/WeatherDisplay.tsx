@@ -1,9 +1,11 @@
+import WeatherDetails from "./WeatherDetails";
+
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-type WeatherDisplayProps = {
+export type WeatherDisplayProps = {
   actualData: {
     location: {
       name: string;
@@ -97,29 +99,7 @@ export default function WeatherDisplay({ actualData, hourlyData }: WeatherDispla
       <h1>Weather Display</h1>
       <div className="card">
         <div className="card-body">
-          <h2 className="card-title">
-            {actualData.location.name}, {actualData.location.region}, {actualData.location.country}
-          </h2>
-          <p className="card-text">Local Time: {actualData.location.localtime}</p>
-          <div className="row">
-            <div className="col-md-6">
-              <p>
-                Temperature: {actualData.current.temp_c}°C / {actualData.current.temp_f}°F
-              </p>
-              <p>Condition: {actualData.current.condition.text}</p>
-              <img src={actualData.current.condition.icon} alt={actualData.current.condition.text} className="img-fluid" />
-            </div>
-            <div className="col-md-6">
-              <p>
-                Wind: {actualData.current.wind_kph} km/h / {actualData.current.wind_mph} mph
-              </p>
-              <p>Humidity: {actualData.current.humidity}%</p>
-              <p>
-                Feels Like: {actualData.current.feelslike_c}°C / {actualData.current.feelslike_f}°F
-              </p>
-              <p>UV Index: {actualData.current.uv}</p>
-            </div>
-          </div>
+          <WeatherDetails actualData={actualData}/>
           <div className="row mt-3">
             <div className="col">
               <h5>Temperature by Hour</h5>
