@@ -79,7 +79,7 @@ export default function App() {
 function Header() {
   return (
     <div className="header">
-      <h1>Weather App</h1>
+      <h1 className="text-center mb-4">Weather App</h1>
     </div>
   );
 }

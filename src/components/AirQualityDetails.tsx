@@ -8,14 +8,30 @@ export default function AirQualityDetails({ airQualityData }: AirQualityDetailsP
   return (
     <div className="row mt-3">
       <div className="col">
-        <h5>Air quality:</h5>
-        <p>PM2.5: {airQualityData.pm2_5} μg/m³</p>
-        <p>PM10: {airQualityData.pm10} μg/m³</p>
-        <p>NO2: {airQualityData.no2} ppb</p>
-        <p>SO2: {airQualityData.so2} ppb</p>
-        <p>CO: {airQualityData.co} ppm</p>
-        <p>O3: {airQualityData.o3} ppb</p>
-        <p>US EPA Index: {airQualityData["us-epa-index"]}</p>
+        <h5 className="mb-3">Air Quality:</h5>
+        <div className="p-3 border rounded bg-light">
+          <p className="mb-2">
+            PM2.5: <span className="fw-bold">{airQualityData.pm2_5} μg/m³</span>
+          </p>
+          <p className="mb-2">
+            PM10: <span className="fw-bold">{airQualityData.pm10} μg/m³</span>
+          </p>
+          <p className="mb-2">
+            NO2: <span className="fw-bold">{airQualityData.no2} ppb</span>
+          </p>
+          <p className="mb-2">
+            SO2: <span className="fw-bold">{airQualityData.so2} ppb</span>
+          </p>
+          <p className="mb-2">
+            CO: <span className="fw-bold">{airQualityData.co} ppm</span>
+          </p>
+          <p className="mb-2">
+            O3: <span className="fw-bold">{airQualityData.o3} ppb</span>
+          </p>
+          <p>
+            US EPA Index: <span className="fw-bold">{airQualityData["us-epa-index"]}</span>
+          </p>
+        </div>
       </div>
     </div>
   );

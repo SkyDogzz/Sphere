@@ -55,8 +55,14 @@ export default function HourlyTemperatureChart({ hourlyData }: HourlyTemperature
   return (
     <div className="row mt-3">
       <div className="col">
-        <h5>Temperature by Hour</h5>
-        <Line data={data} options={options} />
+        <div className="card">
+          <div className="card-header">
+            <h5>Temperature by Hour</h5>
+          </div>
+          <div className="card-body">
+            <Line data={data} options={options} />
+          </div>
+        </div>
       </div>
     </div>
   );

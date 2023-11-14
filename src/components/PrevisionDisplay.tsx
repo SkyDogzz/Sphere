@@ -35,19 +35,23 @@ export default function PrevisionDisplay({ data }: PrevisionDisplayProps) {
   };
 
   return (
-    <div className="prevision-display">
-      <h1>Prevision Display</h1>
+    <div className="prevision-display mt-3">
+      <h1 className="text-center mb-4">Prevision Display</h1>
       {data && (
         <>
-          <h2>{data.location.name}</h2>
-          <div className="day-buttons">
+          <h2 className="text-center mb-3">{data.location.name}</h2>
+          <div className="d-flex justify-content-center flex-wrap mb-3">
             {data.forecast.forecastday.slice(1).map((day, index) => (
-              <button key={day.date} onClick={() => handleDayClick(index)}>
+              <button key={day.date} onClick={() => handleDayClick(index)} className="btn btn-primary m-1">
                 {day.date}
               </button>
             ))}
           </div>
-          {selectedDay !== null && <HourlyTemperatureChart hourlyData={data.forecast.forecastday[selectedDay]} />}
+          {selectedDay !== null && (
+            <div className="mt-4">
+              <HourlyTemperatureChart hourlyData={data.forecast.forecastday[selectedDay]} />
+            </div>
+          )}
         </>
       )}
     </div>
