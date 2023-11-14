@@ -7,13 +7,22 @@ import SearchBar from "./components/SearchBar";
 import ErrorMessage from "./components/ErrorMessage";
 import LoadingSpinner from "./components/LoadingSpinner";
 
+const SEARCH_STORAGE_KEY = "search";
+
 export default function App() {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(() => {
+    const storedSearch = localStorage.getItem(SEARCH_STORAGE_KEY);
+    return storedSearch !== null ? storedSearch : "";
+  });
   const [weatherData, setWeatherData] = useState<any>(null);
   const [hourlyData, setHourlyData] = useState<any>(null);
   const [previsionData, setPrevisionData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string>("");
+
+  useEffect(() => {
+    localStorage.setItem(SEARCH_STORAGE_KEY, search);
+  }, [search]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +36,8 @@ export default function App() {
         try {
           const searchResponse = await axios.get(searchApiUrl + weatherApiKey + "&q=" + search);
           if (searchResponse.data.length > 0) {
+            localStorage.setItem(SEARCH_STORAGE_KEY, search);
+
             try {
               const weatherResponse = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
               setWeatherData(weatherResponse.data);
