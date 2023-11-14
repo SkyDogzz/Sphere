@@ -4,6 +4,7 @@ import axios from "axios";
 import WeatherDisplay from "./components/WeatherDisplay";
 import PrevisionDisplay from "./components/PrevisionDisplay";
 import SearchBar from "./components/SearchBar";
+import ErrorMessage from "./components/ErrorMessage";
 
 export default function App() {
   const [search, setSearch] = useState<string>("");
@@ -38,7 +39,7 @@ export default function App() {
           setApiError(error.response.data.error.message);
           setHourlyData(null);
         }
-        
+
         try {
           const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=7&aqi=yes&alerts=yes");
           setPrevisionData(previsionResponse.data);
@@ -61,7 +62,7 @@ export default function App() {
     <div className="App container-xl">
       <Header />
       <SearchBar search={search} setSearch={setSearch} />
-      {apiError && <p className="error-message">{apiError}</p>}
+      {apiError && <ErrorMessage message={apiError}/>}
       {isLoading ? <LoadingSpinner /> : <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />}
       {isLoading ? <LoadingSpinner /> : <PrevisionDisplay data={previsionData} />}
     </div>
