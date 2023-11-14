@@ -5,6 +5,7 @@ import WeatherDisplay from "./components/WeatherDisplay";
 import PrevisionDisplay from "./components/PrevisionDisplay";
 import SearchBar from "./components/SearchBar";
 import ErrorMessage from "./components/ErrorMessage";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 export default function App() {
   const [search, setSearch] = useState<string>("");
@@ -62,9 +63,15 @@ export default function App() {
     <div className="App container-xl">
       <Header />
       <SearchBar search={search} setSearch={setSearch} />
-      {apiError && <ErrorMessage message={apiError}/>}
-      {isLoading ? <LoadingSpinner /> : <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />}
-      {isLoading ? <LoadingSpinner /> : <PrevisionDisplay data={previsionData} />}
+      {apiError && <ErrorMessage message={apiError} />}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />
+          <PrevisionDisplay data={previsionData} />
+        </>
+      )}
     </div>
   );
 }
@@ -75,8 +82,4 @@ function Header() {
       <h1>Weather App</h1>
     </div>
   );
-}
-
-function LoadingSpinner() {
-  return <div className="loading-spinner">Chargement...</div>;
 }
