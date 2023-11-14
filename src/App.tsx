@@ -8,6 +8,7 @@ export default function App() {
   const [search, setSearch] = useState<string>("");
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +22,7 @@ export default function App() {
           setData(response.data);
         } catch (error: any) {
           if (error.response) console.error("Error " + error.response.data.error.code + ": " + error.response.data.error.message);
+          setApiError(error.response.data.error.message);
         }
         setTimeout(() => {
           setIsLoading(false);
@@ -34,6 +36,7 @@ export default function App() {
   return (
     <div className="App container-xl">
       <Header />
+      {apiError && <p className="error-message">{apiError}</p>}
       {isLoading ? <LoadingSpinner /> : <WeatherDisplay data={data} />}
       <SearchBar search={search} setSearch={setSearch} />
     </div>
