@@ -1,5 +1,5 @@
 import WeatherDetails from "./WeatherDetails";
-import HourlyTemperatureChart from "./HourlyTemperatureChart ";
+import HourlyTemperatureChart from "./HourlyTemperatureChart";
 import AirQualityDetails from "./AirQualityDetails";
 
 export type WeatherDisplayProps = {
@@ -57,7 +57,7 @@ export default function WeatherDisplay({ actualData, hourlyData }: WeatherDispla
       <div className="card">
         <div className="card-body">
           <WeatherDetails actualData={actualData} />
-          <HourlyTemperatureChart hourlyData={hourlyData} />
+          <HourlyTemperatureChart hourlyData={hourlyData.forecast.forecastday[0]} />
           <AirQualityDetails airQualityData={actualData.current.air_quality} />
         </div>
       </div>

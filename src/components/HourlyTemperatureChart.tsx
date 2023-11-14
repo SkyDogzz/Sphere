@@ -1,18 +1,21 @@
-import { WeatherDisplayProps } from "./WeatherDisplay";
-
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 type HourlyTemperatureChartProps = {
-  hourlyData: WeatherDisplayProps["hourlyData"];
+  hourlyData: {
+    hour: {
+      temp_c: number;
+      temp_f: number;
+    }[];
+  };
 };
 
 export default function HourlyTemperatureChart({ hourlyData }: HourlyTemperatureChartProps) {
   const hours = Array.from({ length: 24 }, (_, i) => i);
-  const temperaturesC = hourlyData.forecast.forecastday[0].hour.map((hourData) => hourData.temp_c);
-  const temperaturesF = hourlyData.forecast.forecastday[0].hour.map((hourData) => hourData.temp_f);
+  const temperaturesC = hourlyData.hour.map((hourData) => hourData.temp_c);
+  const temperaturesF = hourlyData.hour.map((hourData) => hourData.temp_f);
 
   const options = {
     scales: {

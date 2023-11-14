@@ -42,7 +42,7 @@ export default function App() {
         }
 
         try {
-          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=7&aqi=yes&alerts=yes");
+          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=8&aqi=yes&alerts=yes");
           setPrevisionData(previsionResponse.data);
           setApiError("");
         } catch (error: any) {
