@@ -19,35 +19,43 @@ export default function App() {
     const fetchData = async () => {
       if (search.length >= 3) {
         setIsLoading(true);
+        const searchApiUrl = "https://api.weatherapi.com/v1/search.json?key=";
         const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
         const previsionApiUrl = "https://api.weatherapi.com/v1/forecast.json?key=";
         const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
         try {
-          const weatherResponse = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
-          setWeatherData(weatherResponse.data);
-          setApiError("");
-        } catch (error: any) {
-          setApiError(error.response.data.error.message);
-          setWeatherData(null);
-        }
+          const searchResponse = await axios.get(searchApiUrl + weatherApiKey + "&q=" + search);
+          if (searchResponse.data.length > 0) {
+            try {
+              const weatherResponse = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
+              setWeatherData(weatherResponse.data);
+              setApiError("");
+            } catch (error: any) {
+              setApiError(error.response.data.error.message);
+              setWeatherData(null);
+            }
 
-        try {
-          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=1&aqi=yes&alerts=yes");
-          setHourlyData(previsionResponse.data);
-          setApiError("");
-        } catch (error: any) {
-          setApiError(error.response.data.error.message);
-          setHourlyData(null);
-        }
+            try {
+              const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=1&aqi=yes&alerts=yes");
+              setHourlyData(previsionResponse.data);
+              setApiError("");
+            } catch (error: any) {
+              setApiError(error.response.data.error.message);
+              setHourlyData(null);
+            }
 
-        try {
-          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=8&aqi=yes&alerts=yes");
-          setPrevisionData(previsionResponse.data);
-          setApiError("");
+            try {
+              const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=8&aqi=yes&alerts=yes");
+              setPrevisionData(previsionResponse.data);
+              setApiError("");
+            } catch (error: any) {
+              setApiError(error.response.data.error.message);
+              setPrevisionData(null);
+            }
+          }
         } catch (error: any) {
-          setApiError(error.response.data.error.message);
-          setPrevisionData(null);
+          console.log(error.response.data.error.message);
         }
 
         setTimeout(() => {
