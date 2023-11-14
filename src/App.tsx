@@ -60,18 +60,20 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="App container-xl">
-      <Header />
-      <SearchBar search={search} setSearch={setSearch} />
-      {apiError && <ErrorMessage message={apiError} />}
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />
-          <PrevisionDisplay data={previsionData} />
-        </>
-      )}
+    <div className="App container-xl ">
+      <div className="p-3 border rounded bg-light">
+        <Header />
+        <SearchBar search={search} setSearch={setSearch} />
+        {apiError && <ErrorMessage message={apiError} />}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <WeatherDisplay actualData={weatherData} hourlyData={hourlyData} />
+            <PrevisionDisplay data={previsionData} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
