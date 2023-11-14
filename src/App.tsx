@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import WeatherDisplay from "./components/WeatherDisplay";
+import PrevisionDisplay from "./components/PrevisionDisplay";
 import SearchBar from "./components/SearchBar";
 
 export default function App() {
   const [search, setSearch] = useState<string>("");
-  const [data, setData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<any>(null);
+  const [previsionData, setPrevisionData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string>("");
 
@@ -15,15 +17,28 @@ export default function App() {
       if (search.length >= 3) {
         setIsLoading(true);
         const weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=";
+        const previsionApiUrl = "https://api.weatherapi.com/v1/forecast.json?key=";
         const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
         try {
-          const response = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
-          setData(response.data);
+          const weatherResponse = await axios.get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes");
+          setWeatherData(weatherResponse.data);
+          setApiError("");
         } catch (error: any) {
           setApiError(error.response.data.error.message);
-          setData(null);
+          setWeatherData(null);
         }
+
+        try {
+          const previsionResponse = await axios.get(previsionApiUrl + weatherApiKey + "&q=" + search + "&days=7&aqi=yes&alerts=yes");
+          setPrevisionData(previsionResponse.data);
+          setApiError("");
+        }
+        catch (error: any) {
+          setApiError(error.response.data.error.message);
+          setPrevisionData(null);
+        }
+
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
@@ -37,7 +52,8 @@ export default function App() {
     <div className="App container-xl">
       <Header />
       {apiError && <p className="error-message">{apiError}</p>}
-      {isLoading ? <LoadingSpinner /> : <WeatherDisplay data={data} />}
+      {isLoading ? <LoadingSpinner /> : <WeatherDisplay data={weatherData} />}
+      {isLoading ? <LoadingSpinner /> : <PrevisionDisplay data={previsionData} />}
       <SearchBar search={search} setSearch={setSearch} />
     </div>
   );
