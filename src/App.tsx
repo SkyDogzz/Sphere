@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <div className="App container-xl ">
-      <div className="p-3 border rounded bg-light">
+      <div className="m-3 p-3 border rounded bg-light">
         <Header />
         <SearchBar search={search} setSearch={setSearch} />
         {apiError && <ErrorMessage message={apiError} />}
