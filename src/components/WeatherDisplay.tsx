@@ -16,7 +16,6 @@ type WeatherDisplayProps = {
 };
 
 export default function WeatherDisplay({ data }: WeatherDisplayProps) {
-  console.log(data);
   return (
     <div className="weather-display">
       {data && (

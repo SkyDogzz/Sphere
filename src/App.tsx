@@ -16,6 +16,7 @@ export default function App() {
       axios
         .get(weatherApiUrl + weatherApiKey + "&q=" + search + "&aqi=yes")
         .then((response) => {
+          if (response.data.location.name === data.location.name) return;
           setData(response.data);
         })
         .catch((error) => {
