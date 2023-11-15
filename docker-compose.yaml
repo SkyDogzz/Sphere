@@ -1,12 +1,22 @@
 version: '3.8'
 
 services:
-  web:
+  sphere:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "81:80"
+      - "82:80"
     environment:
       - NODE_ENV=production
     restart: always
+    networks:
+      - web
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.sphere.rule=Host(`sphere.tstephan.fr`)"
+    - "traefik.http.services.sphere.loadbalancer.server.port=80"
+
+networks:
+  web:
+    external: true
