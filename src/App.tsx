@@ -79,7 +79,7 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="App container-xl ">
+    <div className="App container-xl p-3">
       <div className="m-3 p-3 border rounded bg-light">
         <Header />
         <SearchBar search={search} setSearch={setSearch} />
