@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   sphere:
@@ -13,9 +13,10 @@ services:
     networks:
       - web
     labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.sphere.rule=Host(`sphere.tstephan.fr`)"
-    - "traefik.http.services.sphere.loadbalancer.server.port=80"
+      - "traefik.enable=true"
+      - "traefik.http.routers.sphere.rule=Host(`sphere.tstephan.fr`)"
+      - "traefik.http.routers.sphere.entrypoints=websecure"
+      - "traefik.http.routers.sphere.tls.certresolver=myresolver"
 
 networks:
   web:
