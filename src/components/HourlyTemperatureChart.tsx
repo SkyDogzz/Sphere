@@ -23,14 +23,35 @@ export default function HourlyTemperatureChart({ hourlyData }: HourlyTemperature
         type: "linear" as const,
         display: true,
         position: "left" as const,
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(0, 0, 0, 0.1)',
+        },
       },
       y1: {
         type: "linear" as const,
         display: true,
         position: "right" as const,
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },plugins: {
+      legend: {
+        display: true,
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Temperature by Hour" as const,
+        font: {
+          size: 16,
+        },
       },
     },
   };
+
 
   const data = {
     labels: hours,

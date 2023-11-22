@@ -69,9 +69,7 @@ export default function App() {
           console.log(error.response.data.error.message);
         }
 
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
+        setIsLoading(false);
       }
     };
 
@@ -80,7 +78,7 @@ export default function App() {
 
   return (
     <div className="App container-xl p-3">
-      <div className="m-3 p-3 border rounded bg-light">
+      <div className="flex justify-center items-center flex-col m-3 p-3 border rounded bg-light">
         <Header />
         <SearchBar search={search} setSearch={setSearch} />
         {apiError && <ErrorMessage message={apiError} />}
