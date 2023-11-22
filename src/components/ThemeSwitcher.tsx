@@ -2,7 +2,7 @@ import Switch from 'react-switch';
 
 interface ThemeSwitcherProps {
   toggleTheme: () => void;
-  isDarkMode: boolean; // Assuming you have a state for tracking dark mode
+  isDarkMode: boolean;
 }
 
 export default function ThemeSwitcher({ toggleTheme, isDarkMode }: ThemeSwitcherProps) {
