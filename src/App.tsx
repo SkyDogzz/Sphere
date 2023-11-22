@@ -82,10 +82,11 @@ export default function App() {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  return (<div className={`app ${isDarkTheme ? 'dark' : 'light'}`}>
-  <ThemeSwitcher toggleTheme={toggleTheme} />
+  return (
+    <div className={`app ${isDarkTheme ? "dark" : "light"}`}>
       <div className="flex justify-center items-center flex-col m-3 p-3 border rounded bg-primary">
         <Header />
+        <ThemeSwitcher toggleTheme={toggleTheme} />
         <SearchBar search={search} setSearch={setSearch} />
         {apiError && <ErrorMessage message={apiError} />}
         {isLoading ? (
