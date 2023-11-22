@@ -10,7 +10,7 @@ export default function Searchbar({ search, setSearch }: SearchBarProps) {
 
   return (
     <div className="searchbar my-4">
-      <form className="flex justify-content-center">
+      <form className="flex justify-center">
         <input
           type="text"
           className="form-control p-2 border border-gray-300 rounded"

@@ -84,7 +84,7 @@ export default function App() {
 
   return (
     <div className={`app ${isDarkTheme ? "dark" : "light"}`}>
-      <div className="flex justify-center items-center flex-col m-3 p-3 border rounded bg-primary">
+      <div className="flex justify-center items-center flex-col p-3 bg-primary">
         <Header />
         <ThemeSwitcher toggleTheme={toggleTheme} isDarkMode={isDarkTheme} />                                    
         <SearchBar search={search} setSearch={setSearch} />

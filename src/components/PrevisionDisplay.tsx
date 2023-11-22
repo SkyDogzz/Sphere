@@ -39,7 +39,7 @@ export default function PrevisionDisplay({ data }: PrevisionDisplayProps) {
       {data && (
         <>
           <h2 className="text-center mb-3 text-2xl font-semibold">{data.location.name}</h2>
-          <div className="flex justify-content-center flex-wrap mb-3">
+          <div className="flex justify-center flex-wrap mb-3">
             {data.forecast.forecastday.slice(1).map((day, index) => (
               <button
                 key={day.date}
