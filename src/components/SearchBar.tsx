@@ -10,8 +10,14 @@ export default function Searchbar({ search, setSearch }: SearchBarProps) {
 
   return (
     <div className="searchbar my-4">
-      <form className="d-flex justify-content-center">
-        <input type="text" className="form-control w-50" placeholder="Search for a city or a country" value={search} onChange={handleChange} />
+      <form className="flex justify-content-center">
+        <input
+          type="text"
+          className="form-control p-2 border border-gray-300 rounded"
+          placeholder="Search for a city or a country"
+          value={search}
+          onChange={handleChange}
+        />
       </form>
     </div>
   );

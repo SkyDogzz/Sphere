@@ -36,18 +36,18 @@ export default function HourlyTemperatureChart({ hourlyData }: HourlyTemperature
     labels: hours,
     datasets: [
       {
-        label: "Temperature in °C",
+        label: 'Temperature in °C',
         data: temperaturesC,
-        borderColor: "blue",
-        backgroundColor: "rgba(0, 0, 255, 0.1)",
-        yAxisID: "y",
+        borderColor: 'blue',
+        backgroundColor: 'rgba(0, 0, 255, 0.1)',
+        yAxisID: 'y',
       },
       {
-        label: "Temperature in °F",
+        label: 'Temperature in °F',
         data: temperaturesF,
-        borderColor: "red",
-        backgroundColor: "rgba(255, 0, 0, 0.1)",
-        yAxisID: "y1",
+        borderColor: 'red',
+        backgroundColor: 'rgba(255, 0, 0, 0.1)',
+        yAxisID: 'y1',
       },
     ],
   };
@@ -56,8 +56,8 @@ export default function HourlyTemperatureChart({ hourlyData }: HourlyTemperature
     <div className="row mt-3">
       <div className="col">
         <div className="card">
-          <div className="card-header">
-            <h5>Temperature by Hour</h5>
+          <div className="card-header bg-blue-500 text-white">
+            <h5 className="text-2xl font-semibold">Temperature by Hour</h5>
           </div>
           <div className="card-body">
             <Line data={data} options={options} />

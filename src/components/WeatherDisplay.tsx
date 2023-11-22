@@ -53,7 +53,7 @@ export default function WeatherDisplay({ actualData, hourlyData }: WeatherDispla
 
   return (
     <div className="container weather-display mt-4">
-      <h1 className="text-center mb-4">Weather Display</h1>
+      <h1 className="text-center mb-4 text-3xl font-semibold">Weather Display</h1>
       <div className="card">
         <div className="card-body">
           <WeatherDetails actualData={actualData} />
