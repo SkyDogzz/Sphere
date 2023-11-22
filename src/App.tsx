@@ -6,10 +6,12 @@ import PrevisionDisplay from "./components/PrevisionDisplay";
 import SearchBar from "./components/SearchBar";
 import ErrorMessage from "./components/ErrorMessage";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 const SEARCH_STORAGE_KEY = "search";
 
 export default function App() {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [search, setSearch] = useState<string>(() => {
     const storedSearch = localStorage.getItem(SEARCH_STORAGE_KEY);
     return storedSearch !== null ? storedSearch : "";
@@ -76,9 +78,13 @@ export default function App() {
     fetchData();
   }, [search]);
 
-  return (
-    <div className="App container-xl p-3">
-      <div className="flex justify-center items-center flex-col m-3 p-3 border rounded bg-light">
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  return (<div className={`app ${isDarkTheme ? 'dark' : 'light'}`}>
+  <ThemeSwitcher toggleTheme={toggleTheme} />
+      <div className="flex justify-center items-center flex-col m-3 p-3 border rounded bg-primary">
         <Header />
         <SearchBar search={search} setSearch={setSearch} />
         {apiError && <ErrorMessage message={apiError} />}

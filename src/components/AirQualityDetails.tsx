@@ -9,7 +9,7 @@ export default function AirQualityDetails({ airQualityData }: AirQualityDetailsP
     <div className="row mt-3">
       <div className="col">
         <h5 className="mb-3 text-2xl font-semibold">Air Quality:</h5>
-        <div className="p-3 border rounded bg-light">
+        <div className="p-3 border rounded bg-primary">
           <p className="mb-2">
             PM2.5: <span className="font-semibold">{airQualityData.pm2_5} μg/m³</span>
           </p>

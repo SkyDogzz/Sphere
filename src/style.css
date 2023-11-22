@@ -3,50 +3,83 @@
 @import 'tailwindcss/utilities';
 
 body {
-  font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif;
+}
+
+*{
+    color: var(--text-primary);
+}
+
+.dark {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --text-primary: #cbd5e0;
+    --text-secondary: #a0aec0;
+}
+
+.light {
+    --bg-primary: #f7fafc;
+    --bg-secondary: #edf2f7;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+}
+
+.bg-primary {
+    background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
 }
 
 .card {
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background-color: #3498db;
-  color: #fff;
-  padding: 1rem;
+    background-color: #3498db;
+    color: #fff;
+    padding: 1rem;
 }
 
 .loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  color: #3498db;
-  height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #3498db;
+    height: 100px;
 }
 
 .error-message {
-  color: #e74c3c;
+    color: #e74c3c;
 }
 
 .btn-info {
-  background-color: #3498db;
-  color: #fff;
+    background-color: #3498db;
+    color: #fff;
 }
 
 .prevision-display {
-  background-color: #ecf0f1;
-  padding: 1rem;
-  border-radius: 0.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
 
 .searchbar {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .searchbar input {
-  padding: 0.5rem;
+    padding: 0.5rem;
 }

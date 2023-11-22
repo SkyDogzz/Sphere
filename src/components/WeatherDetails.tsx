@@ -13,7 +13,7 @@ export default function WeatherDetails({ actualData }: WeatherDetailsProps) {
         </h2>
         <p className="card-text">Local Time: {actualData.location.localtime}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-3 border rounded bg-light">
+          <div className="p-3 border rounded bg-primary">
             <p className="text-lg">
               Temperature: <span className="font-semibold">{actualData.current.temp_c}°C / {actualData.current.temp_f}°F</span>
             </p>
@@ -22,7 +22,7 @@ export default function WeatherDetails({ actualData }: WeatherDetailsProps) {
             </p>
             <img src={actualData.current.condition.icon} alt={actualData.current.condition.text} className="img-fluid" />
           </div>
-          <div className="p-3 border rounded bg-light">
+          <div className="p-3 border rounded bg-primary">
             <p className="text-lg">
               Wind: <span className="font-semibold">{actualData.current.wind_kph} km/h / {actualData.current.wind_mph} mph</span>
             </p>
