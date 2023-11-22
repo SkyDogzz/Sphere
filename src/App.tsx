@@ -14,7 +14,7 @@ export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [search, setSearch] = useState<string>(() => {
     const storedSearch = localStorage.getItem(SEARCH_STORAGE_KEY);
-    return storedSearch !== null ? storedSearch : "";
+    return storedSearch !== null ? storedSearch : "Paris";
   });
   const [weatherData, setWeatherData] = useState<any>(null);
   const [hourlyData, setHourlyData] = useState<any>(null);
