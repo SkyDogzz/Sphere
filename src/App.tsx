@@ -97,6 +97,7 @@ export default function App() {
             <PrevisionDisplay data={previsionData} />
           </>
         )}
+        <Footer />
       </div>
     </div>
   );
@@ -104,8 +105,21 @@ export default function App() {
 
 function Header() {
   return (
-    <div className="header">
-      <h1 className="text-center mb-4">Weather App</h1>
+    <div className="header bg-secondary p-4 rounded">
+      <h1 className="text-center text-4xl font-bold text-primary mb-4">Weather App</h1>
+      <p className="text-center text-lg text-primary">
+        Your go-to weather information application!
+      </p>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="footer bg-secondary p-4 mt-8 rounded">
+      <p className="text-center text-lg text-primary">
+        © {new Date().getFullYear()} Weather App. All rights reserved.
+      </p>
     </div>
   );
 }
