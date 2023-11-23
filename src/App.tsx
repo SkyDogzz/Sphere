@@ -9,9 +9,13 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 
 const SEARCH_STORAGE_KEY = "search";
+const THEME_STORAGE_KEY = "theme";
 
 export default function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
+    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    return storedTheme !== null ? storedTheme === "dark" : true;
+  });
   const [search, setSearch] = useState<string>(() => {
     const storedSearch = localStorage.getItem(SEARCH_STORAGE_KEY);
     return storedSearch !== null ? storedSearch : "Paris";
@@ -80,13 +84,14 @@ export default function App() {
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, isDarkTheme ? "light" : "dark");
   };
 
   return (
     <div className={`app ${isDarkTheme ? "dark" : "light"}`}>
       <div className="flex justify-center items-center flex-col p-3 bg-primary">
         <Header />
-        <ThemeSwitcher toggleTheme={toggleTheme} isDarkMode={isDarkTheme} />                                    
+        <ThemeSwitcher toggleTheme={toggleTheme} isDarkMode={isDarkTheme} />
         <SearchBar search={search} setSearch={setSearch} />
         {apiError && <ErrorMessage message={apiError} />}
         {isLoading ? (
@@ -105,11 +110,9 @@ export default function App() {
 
 function Header() {
   return (
-    <div className="header bg-secondary p-4 rounded">
+    <div className="header bg-secondary p-4 rounded mb-4">
       <h1 className="text-center text-4xl font-bold text-primary mb-4">Weather App</h1>
-      <p className="text-center text-lg text-primary">
-        Your go-to weather information application!
-      </p>
+      <p className="text-center text-lg text-primary">Your go-to weather information application!</p>
     </div>
   );
 }
@@ -117,9 +120,7 @@ function Header() {
 function Footer() {
   return (
     <div className="footer bg-secondary p-4 mt-8 rounded">
-      <p className="text-center text-lg text-primary">
-        © {new Date().getFullYear()} Weather App. All rights reserved.
-      </p>
+      <p className="text-center text-lg text-primary">© {new Date().getFullYear()} Weather App. All rights reserved.</p>
     </div>
   );
 }
